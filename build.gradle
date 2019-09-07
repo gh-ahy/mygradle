@@ -1,0 +1,32 @@
+import javax.tools.JavaCompiler
+
+apply plugin:'java'
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'maven'
+
+group 'com.test'
+version '1.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile (
+            'org.springframework:spring-context:4.2.6.RELEASE',
+            'joda-time:joda-time:2.9.4'
+    )
+    testCompile (
+            'junit:junit:4.12'
+    )
+}
+
+tasks.withType(JavaCompiler){
+    options.encoding = "UTF-8"
+}
+
+[compileJava,javadoc,compileTestJava]*.options*.encoding = "UTF-8"
